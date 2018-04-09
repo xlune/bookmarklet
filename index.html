@@ -13,7 +13,7 @@
 <div class="jumbotron">
   <div class="container">
     <h1 class="display-3">Bookmarklet</h1>
-    <p>ちょっと楽するシリーズ</p>
+    <p>ちょっと楽するシリーズ？</p>
   </div>
 </div>
 
@@ -21,7 +21,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2>Wantedly All Support (v20180409)</h2>
-      <p>ログインユーザがプロジェクト一覧ページで一括応援する<br />https://www.wantedly.com/companies/*/projects</p>
+      <p>
+        ログインユーザがプロジェクト一覧ページで一括応援する<br />
+        対応URL: https://www.wantedly.com/companies/*/projects<br />
+        下記ボタンをブックマークバーにD&D後、対応URLで利用
+      </p>
       <p><a class="btn btn-secondary" href="javascript:(function(k){if(k.confirm('\u5fdc\u63f4\u4e00\u62ec\u767b\u9332\u3092\u5b9f\u884c\u3057\u307e\u3059\u304b\uff1f')){for(var d=[],e=[],f=[],c=document.getElementsByTagName('script'),g=0;g<c.length;g++){var a=c[g];if(null!==a.getAttribute('data-hypernova-key')){a=a.textContent;a=a.replace(/(^\x3c!--|--\x3e$)/g,'');try{var l=JSON.parse(a)}catch(m){alert('ERROR: \u30c7\u30fc\u30bf\u30d1\u30fc\u30b9\u5931\u6557');return}d=l.body.result.projects}}if(0==d.length)alert('ERROR: \u6709\u52b9\u306a\u30d7\u30ed\u30b8\u30a7\u30af\u30c8ID\u304c\u3042\u308a\u307e\u305b\u3093');else{var h='';c=document.getElementsByTagName('meta');'csrf-token'in c&&(h=c['csrf-token'].content||'');''==h?alert('ERROR: csrf\u30c8\u30fc\u30af\u30f3\u304c\u53d6\u5f97\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f'):d.forEach(function(a){var b=new XMLHttpRequest,c={project_support:{message:'',project_id:a,post_to_fb_wall:!1,post_to_linkedin:!1,post_to_twitter:!1,project_variation_id:0}};b.open('POST','/projects/'+a+'/supports');b.setRequestHeader('accept','application/json, text/plain, */*');b.setRequestHeader('Content-Type','application/json');b.setRequestHeader('x-csrf-token',h);b.onreadystatechange=function(){4==b.readyState&&(200==b.status?e.push(a):f.push(a),d.length===e.length+f.length&&(alert('\u6210\u529f: '+e.length,'\u5931\u6557: '+f.length),k.location.reload()))};b.send(JSON.stringify(c))})}}})(window);" role="button">Wantedly All Support Bookmarklet</a></p>
     </div>
     <!--
