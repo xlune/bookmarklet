@@ -2,13 +2,25 @@
     if (!w.confirm("応援一括登録を実行しますか？")) {
         return;
     }
-    var links = w.document.getElementsByClassName('project-support-link');
+    var jsonDataKey = 'data-hypernova-key';
     var projectIds = [];
     var successIds = [];
     var faildIds = [];
-    [].forEach.call(links, function(el){
-        projectIds.push(el.dataset.projectId);
-    });
+    var allScript = document.getElementsByTagName('script');
+    for (var i = 0; i<allScript.length; i++) {
+      var el = allScript[i];
+      if (el.getAttribute(jsonDataKey) !== null) {
+        var ctx = el.textContent;
+        ctx = ctx.replace(/(^<!--|-->$)/g, '');
+        try {
+          var data = JSON.parse(ctx);
+        } catch (err) {
+          alert('ERROR: データパース失敗');
+          return;
+        }
+        projectIds = data['body']['result']['projects'];
+      }
+    }
     if (projectIds.length == 0) {
         alert('ERROR: 有効なプロジェクトIDがありません');
         return;
@@ -22,7 +34,6 @@
         alert('ERROR: csrfトークンが取得できませんでした');
         return;
     }
-    document.getElementsByTagName('meta')['csrf-token'].content
     projectIds.forEach(function(projectId){
         var xhr = new XMLHttpRequest();
         var param = {
