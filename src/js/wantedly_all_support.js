@@ -1,5 +1,5 @@
 (function(w){
-    if (!w.confirm("応援一括登録を実行しますか？")) {
+    if (!w.confirm('応援一括登録を実行しますか？')) {
         return;
     }
     var jsonDataKey = 'data-hypernova-key';
@@ -18,7 +18,10 @@
           alert('ERROR: データパース失敗');
           return;
         }
-        projectIds = data['body']['projects'];
+        var projects = data['body']['projects'] || [];
+        projectIds = projects.map(function(p){
+          return p['id'];
+        })
       }
     }
     if (projectIds.length == 0) {
