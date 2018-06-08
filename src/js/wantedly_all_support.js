@@ -18,7 +18,7 @@
           alert('ERROR: データパース失敗');
           return;
         }
-        projectIds = data['body']['result']['projects'];
+        projectIds = data['body']['projects'];
       }
     }
     if (projectIds.length == 0) {
